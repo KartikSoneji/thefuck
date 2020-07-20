@@ -6,7 +6,6 @@ try:
     from shutil import get_terminal_size
 except ImportError:
     from backports.shutil_get_terminal_size import get_terminal_size
-import six
 import pyte
 from ..exceptions import ScriptNotInLog
 from .. import const, logs
@@ -74,10 +73,6 @@ def get_output(script):
     :rtype: str | None
 
     """
-    if six.PY2:
-        logs.warn('Experimental instant mode is Python 3+ only')
-        return None
-
     if 'THEFUCK_OUTPUT_LOG' not in os.environ:
         logs.warn("Output log isn't specified")
         return None

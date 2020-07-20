@@ -4,17 +4,11 @@ from tests.functional.plots import with_confirmation, without_confirmation, \
     select_command_with_arrows, how_to_configure
 
 
-python_3 = ('thefuck/python3-zsh',
-            u'''FROM python:3
+dockerfile = ('thefuck/zsh',
+              u'''FROM python:3
                 RUN apt-get update
                 RUN apt-get install -yy zsh''',
-            u'sh')
-
-python_2 = ('thefuck/python2-zsh',
-            u'''FROM python:2
-                RUN apt-get update
-                RUN apt-get install -yy zsh''',
-            u'sh')
+              u'sh')
 
 
 init_zshrc = u'''echo '
@@ -29,9 +23,8 @@ echo "instant mode ready: $THEFUCK_INSTANT_MODE"
 ' > ~/.zshrc'''
 
 
-@pytest.fixture(params=[(python_3, False),
-                        (python_3, True),
-                        (python_2, False)])
+@pytest.fixture(params=[(dockerfile, False),
+                        (dockerfile, True)])
 def proc(request, spawnu, TIMEOUT):
     container, instant_mode = request.param
     proc = spawnu(*container)

@@ -22,18 +22,14 @@ else:
     long_description = ''
 
 version = sys.version_info[:2]
-if version < (2, 7):
-    print('thefuck requires Python version 2.7 or later' +
-          ' ({}.{} detected).'.format(*version))
-    sys.exit(-1)
-elif (3, 0) < version < (3, 5):
+if (3, 0) < version < (3, 5):
     print('thefuck requires Python version 3.5 or later' +
           ' ({}.{} detected).'.format(*version))
     sys.exit(-1)
 
 VERSION = '3.30'
 
-install_requires = ['psutil', 'colorama', 'six', 'decorator', 'pyte']
+install_requires = ['psutil', 'colorama', 'decorator', 'pyte']
 extras_require = {':python_version<"3.4"': ['pathlib2'],
                   ':python_version<"3.3"': ['backports.shutil_get_terminal_size'],
                   ":sys_platform=='win32'": ['win_unicode_console']}

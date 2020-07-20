@@ -4,13 +4,9 @@ from tests.functional.plots import with_confirmation, without_confirmation, \
     select_command_with_arrows, how_to_configure
 
 
-python_3 = (u'thefuck/python3-bash',
-            u'FROM python:3',
-            u'sh')
-
-python_2 = (u'thefuck/python2-bash',
-            u'FROM python:2',
-            u'sh')
+dockerfile = (u'thefuck/bash',
+              u'FROM python:3',
+              u'sh')
 
 
 init_bashrc = u'''echo '
@@ -22,9 +18,8 @@ echo "instant mode ready: $THEFUCK_INSTANT_MODE"
 ' > ~/.bashrc'''
 
 
-@pytest.fixture(params=[(python_3, False),
-                        (python_3, True),
-                        (python_2, False)])
+@pytest.fixture(params=[(dockerfile, False),
+                        (dockerfile, True)])
 def proc(request, spawnu, TIMEOUT):
     container, instant_mode = request.param
     proc = spawnu(*container)
